@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            vertical-align: top;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .banner {
+            width: 1125px;
+            height: 352px;
+            margin: 100px auto;
+            /* outline: 5px solid blue; */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner .bannerImgs {
+            width: 100%;
+        }
+
+        .banner .bannerImgs ul {
+            transition: all 0.5s;
+            transform: translateX(-1125px);
+            width: 700%;
+        }
+
+        .banner .bannerImgs ul li {
+            float: left;
+        }
+
+        .banner .arrow-left,
+        .banner .arrow-right {
+            width: 35px;
+            height: 70px;
+            background: orange;
+            position: absolute;
+            top: 50%;
+            margin-top: -35px;
+            text-align: center;
+            line-height: 70px;
+            font-size: 30px;
+
+            color: white;
+
+            user-select: none;
+        }
+
+        .banner .arrow-left {
+            left: 0;
+        }
+
+        .banner .arrow-right {
+            right: 0;
+        }
+
+        .banner ol {
+            width: 140px;
+            height: 20px;
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            left: 50%;
+            margin-left: -70px;
+            bottom: 20px;
+        }
+
+        .banner ol li {
+            width: 20px;
+            height: 20px;
+            background: black;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .banner ol li.active {
+            background: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 外层大盒子.banner -->
+    <div class="banner">
+        <!-- 轮播图 -->
+        <div class="bannerImgs">
+            <ul class="clearfix">
+                <li><a href="#"><img src="./images/05.jpg" /></a></li>
+                <li><a href="#"><img src="./images/01.jpg" /></a></li>
+                <li><a href="#"><img src="./images/02.jpg" /></a></li>
+                <li><a href="#"><img src="./images/03.jpg" /></a></li>
+                <li><a href="#"><img src="./images/04.jpg" /></a></li>
+                <li><a href="#"><img src="./images/05.jpg" /></a></li>
+                <li><a href="#"><img src="./images/01.jpg" /></a></li>
+            </ul>
+        </div>
+
+        <!-- 左右箭头 -->
+        <div class="arrow-left">&lt;</div>
+        <div class="arrow-right">&gt;</div>
+
+    </div>
+    <script src="./jQuery.min.js"></script>
+    <script>
+
+        var banner = $(".banner");
+        var bannerImgsUl = $(".bannerImgs ul");
+        console.log(bannerImgsUl);
+        (bannerImgsUl);
+        var arrowRight = $(".arrow-right")[0];
+        // 定义一个轮播图索引号
+        var bannerIndex = 1;
+
+        // 封装 右滑函数
+        function rightSlide() {
+            bannerImgsUl.css("transition", "all 0.5s");
+            bannerIndex++;
+            bannerImgsUl.css("transform", "translateX(-" + bannerIndex * 1125 + "px)");
+            bannerImgsUl.on('transitionend', function () {
+                if (bannerIndex == 6) {
+
+                    bannerImgsUl.css("transition", "none");
+                    bannerIndex = 1;
+                    bannerImgsUl.css("transform", "translateX(-" + bannerIndex * 1125 + "px)");
+                }
+                console.log(bannerIndex);
+
+            }
+            )
+        }
+
+
+
+
+
+        //封装 左滑函数
+        function leftSlide() {
+            bannerImgsUl.css("transition", "all 0.5s");
+            bannerIndex--;
+            bannerImgsUl.css("transform", "translateX(-" + bannerIndex * 1125 + "px)");
+            bannerImgsUl.on('transitionend', function () {
+                if (bannerIndex == 0) {
+
+                    bannerImgsUl.css("transition", "none");
+                    bannerIndex = 5;
+                    bannerImgsUl.css("transform", "translateX(-" + bannerIndex * 1125 + "px)");
+                }
+                console.log(bannerIndex);
+
+            }
+            )
+
+        }
+
+        // 触摸事件
+
+        var touch;
+        bannerImgsUl.on('touchstart', function (e) {
+            console.log('触摸开始');
+            // e.stopPropagation();
+            touch = e.touches[0];
+            // console.log('起始坐标：', touch.pageX);
+        })
+        var touchend
+        bannerImgsUl.on('touchend', function (e) {
+            bannerImgsUl.css("transition", "all 0.5s");
+
+            touchend = e.changedTouches[0];
+            // console.log(touchend.pageX);
+
+            // 右滑
+            if (touch.pageX - touchend.pageX > 1125 / 3) {
+                rightSlide()
+            };
+            //左滑
+            if (touchend.pageX - touch.pageX > 1125 / 3) {
+                leftSlide()
+            }
+            console.log('触摸结束');
+            ; console.log(bannerIndex);
+
+            // console.log('结束坐标：', touchend.pageX);
+
+        });
+
+        //滑动中
+        // bannerImgsUl.on('touchmove', function (e) {
+        //     console.log('滑动中');
+        //     console.log(touchend.pageX);
+
+        //     if (touch.pageX - touchend.pageX > 1125 / 3) {
+        //         bannerImgsUl.css("transform", "translateX(-" + bannerIndex * 1125 - touch.pageX - touchend.pageX + "px)");
+        //     }
+        // })
+        var timer = setInterval(function () {
+            rightSlide()
+        }, 2000);
+
+        banner.on('mouseover', function () {
+            console.log('鼠标经过');
+            clearInterval(timer);
+        })
+        banner.on('mouseout', function () {
+            timer = setInterval(function () {
+                rightSlide()
+            }, 2000);
+        })
+
+    </script>
+</body>
+
+</html>
