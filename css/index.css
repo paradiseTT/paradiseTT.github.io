@@ -1,17 +1,30 @@
 * {
-    box-sizing: border-box;
-    list-style: none;
+  box-sizing: border-box;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-
 h1,
 h2 {
-    text-align: center;
-    width: 100%;
+  width: 100%;
+  text-align: center;
+  margin: 20px;
 }
-
 .w {
-    width: 1200px;
-    margin: 0 auto;
+  width: 1000px;
+  margin: 0 auto;
 }
-
+.w .c {
+  background-color: #DDE3E9;
+  height: 400px;
+  padding: 10px;
+}
+.w li {
+  float: left;
+  margin: 20px;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
 /*# sourceMappingURL=./index.css.map */
