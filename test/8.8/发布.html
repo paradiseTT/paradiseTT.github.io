@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.js"></script>
+
+    <style>
+        .big {
+            width: 800px;
+            margin: 0 auto;
+            border: 3px solid black;
+            position: relative;
+            overflow-x: hidden;
+            transition: all .5s;
+        }
+
+        .small {
+            width: 600px;
+            margin: 20px auto;
+
+        }
+
+        input {
+            width: 600px;
+            height: 100px;
+            border: 3px solid black;
+        }
+
+        .c1 {
+            position: absolute;
+            left: 10px;
+            top: 70px;
+        }
+
+        .c2 {
+            position: absolute;
+            right: 10px;
+            top: 70px;
+        }
+
+        .del {
+            float: right;
+        }
+
+        ul {
+            overflow: hidden;
+        }
+
+        ul li {
+            float: left;
+        }
+
+        ul button {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w">
+        <div class="big">
+            <div class="c1">微博发布</div>
+            <div class="c2"><button class="fabu">发布</button></div>
+            <div class="small"><input type="text"></div>
+            <ul></ul>
+        </div>
+    </div>
+</body>
+<script>
+
+    function fabu() {
+        if ($("input").val() !== '') {
+            $('.big').append('<ul>' + '<li>' + $("input").val() + '</li>' + '<button class="del">' + "删除" + '</button>') + '</ul>'
+        }
+        $("input").val('')
+
+
+    }
+
+    $('button.fabu').click(function () {
+        fabu()
+    })
+
+    $("button.del").click(function () {
+        111
+    })
+
+
+
+
+
+
+
+</script>
+
+</html>

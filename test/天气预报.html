@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.7.1.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .c {
+            width: 700px;
+            height: 500px;
+            margin: 0 auto;
+            text-align: center;
+            border: 3px solid lightskyblue;
+        }
+
+        .input {
+            display: flex;
+            justify-content: center;
+
+
+        }
+
+        input {
+            width: 400px;
+        }
+
+        .srech {
+            height: 100%;
+            width: 50px;
+            background-color: lightskyblue;
+            box-sizing: border-box;
+            padding: 5px;
+        }
+
+        .hot {
+            overflow: hidden;
+            width: 450px;
+            margin: 0 auto;
+        }
+
+        .hot {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        ul {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        li {
+
+            list-style: none;
+        }
+
+        .yubao {
+            justify-content: space-between;
+        }
+
+        .yubao ul {
+            justify-content: space-between;
+
+
+        }
+
+        .yubao ul li {
+            border-right: 1px solid gray;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            margin-top: 50px;
+        }
+
+        .yubao ul li {
+            flex-wrap: wrap;
+        }
+
+        .yubao ul li :nth-child(2) {
+            color: orange;
+        }
+
+        .yubao ul li :nth-child(3) {
+            color: orange;
+
+        }
+
+        .yubao ul li :nth-child(4) {
+            color: grey;
+
+        }
+
+        .yubao ul li :nth-child(5) {
+            color: black;
+
+        }
+
+        .yubao ul li :nth-child(6) {
+            color: black;
+
+
+        }
+
+        .hot ul {
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="c">
+        <h1>天气预报</h1>
+        <div class="input">
+            <input type="text" placeholder='请输入城市'>
+            <div class="srech">搜索</div>
+        </div>
+        <div class="look">
+            <div class="hot">
+                <div class="left">热门城市:</div>
+                <ul>
+                    <li>北京</li>
+                    <li>上海</li>
+                    <li>广州</li>
+                    <li>长春</li>
+                    <li>
+                        沈阳
+                    </li>
+                    <li>三亚</li>
+                </ul>
+                <div class="right">
+                    换一换<img src="./今日作业素材/images/refresh-icon.png" alt="">
+                </div>
+            </div>
+            <div class="yubao">
+                <ul>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    $('.srech').on('click', function () {
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', 'https://apis.tianapi.com/tianqi/index?key=7805cb45b78335d1c40b7501025fe7c5&city=' + $('.input input').val() + '&type=7')
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log("ajax状态码=>", xhr.readyState);
+                var ready = JSON.parse(xhr.responseText)
+                var resut = ready
+                var result = ready.result
+
+                var list = result.list
+
+                for (var i = 0; i < 6; i++) {
+                    var str = ''
+                    console.log(list[i].weather);
+                    str += '<li>'
+                    str += '<p>' + '<img src="./今日作业素材/images/' + list[i].weathercode + '.png" alt="">' + '</p>'
+                    str += '<p>' + list[i].weather + '</p>'
+                    str += '<p>' + '最低温' + list[i].lowest + '最高温' + list[i].humidity + '</p>'
+                    str += '<p>' + list[i].date + '</p>'
+                    str += '<p>' + list[i].wind + '</p>'
+                    str += '<p>' + list[i].windsc + '</p>'
+                    str += '</li>'
+
+                    var ul = document.querySelector('.yubao ul')
+                    ul.innerHTML += str
+                }
+
+            }
+        };
+    })
+    $('.right').click(function () {
+        $('.left ul')
+    })
+    console.log($('.hot li').text());
+
+
+    $('.hot li').click(function () {
+        console.log($(this));
+
+        $('.input input').val() = $(this).text()
+    })
+</script>
+
+</html>

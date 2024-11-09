@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /> -->
+        <link rel="stylesheet" href="../minireset.css" />
+        <link rel="stylesheet" href="css/index.css" />
+        <style>
+            a{
+                text-decoration: none;
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+       
+        <div class="herolist">
+          
+            <div class="w">
+                
+                <div class="herolist-box">
+                  
+                    <div class="herolist-types">
+                        <ul class="types-left">
+                            <li>综合</li>
+                            <li>定位</li>
+                        </ul>
+
+                        <ul class="types-name">
+                          
+                        </ul>
+
+                        <ul class="types-name">
+                        </ul>
+
+                        <div class="herosearch">
+                            <input type="text" placeholder="请输入你想要搜索的英雄名" />
+                            <a href="#"></a>
+                        </div>
+                    </div>
+                
+                    <div class="herolist-content">
+                        <ul class="clearfix">
+                
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+        <script src="./herolist.js"></script>
+        <script>
+           
+            function $(cssStr) {
+                var dom = document.querySelectorAll(cssStr);
+                if (dom.length === 0) {
+                    return null;
+                }
+
+                if (dom.length === 1) {
+                    return dom[0];
+                }
+
+                return dom;
+            }
+           
+            var herolistContentUl = $(".herolist-content ul");
+
+           
+            heroList.reverse();
+
+           
+            function renderHeroList(heroListData) {
+                herolistContentUl.innerHTML = heroListData
+                    .map(function (item) {
+                        var str = "";
+                        str += "<li>";
+                        str += '<a href="https://pvp.qq.com/web201605/herodetail/' + item.id_name + '.shtml" target="_blank">';
+                        str += '<img src="https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + item.ename + "/" + item.ename + '.jpg" />';
+                        str += item.cname;
+                        str += "</a>";
+                        str += "</li>";
+                        return str;
+                    })
+                    .join("");
+            }
+
+            
+            renderHeroList(heroList);
+
+            
+            $(".herolist-types .types-name")[0].innerHTML = pTypes
+                .map(function (item) {
+                    var str = "";
+                    str += "<li data-ptype='" + item.id + "'>";
+                    str += "<span><i></i></span>" + item.ptype;
+                    str += "</li>";
+                    return str;
+                })
+                .join("");
+
+           
+            $(".herolist-types .types-name")[1].innerHTML = heroTypes
+                .map(function (item) {
+                    var str = "";
+                    if (item.id === 0) {
+                        str += "<li class='active' data-type='0'>";
+                    } else {
+                        str += "<li data-type='" + item.id + "'>";
+                    }
+                    str += "<span><i></i></span>" + item.type;
+                    str += "</li>";
+                    return str;
+                })
+                .join("");
+
+           
+            var typesNamelis = $(".herolist-types .types-name li");
+           
+            for (var i = 0; i < typesNamelis.length; i++) {
+                typesNamelis[i].onclick = function () {
+                    for (var j = 0; j < typesNamelis.length; j++) {
+                       
+                        typesNamelis[j].classList.remove("active");
+                    }
+
+                   
+                    this.classList.add("active");
+
+                
+                    var ptypeIndex = this.dataset.ptype;
+                    var typeIndex = this.dataset.type;
+
+                    if (ptypeIndex !== undefined) {
+                       
+                        var targetHeroList = heroList.filter(function (item) {
+                            return item.pay_type == ptypeIndex;
+                        });
+                    }
+
+                    if (typeIndex !== undefined) {
+                        if (typeIndex == 0) {
+                            var targetHeroList = heroList;
+                        } else {
+                            
+                            var targetHeroList = heroList.filter(function (item) {
+                                return item.hero_type == typeIndex || item.hero_type2 == typeIndex;
+                            });
+                        }
+                    }
+
+                   
+                    renderHeroList(targetHeroList);
+                };
+            }
+
+           
+            $(".herosearch input").addEventListener("input", function () {
+                
+                var keyword = this.value;
+              
+                var targetHeroList = heroList.filter(function (item) {
+                    return item.cname.indexOf(keyword) != -1;
+                });
+                
+                renderHeroList(targetHeroList);
+
+                for (var j = 0; j < typesNamelis.length; j++) {
+                   
+                    typesNamelis[j].classList.remove("active");
+                }
+
+               
+                typesNamelis[2].classList.add("active");
+            });
+        </script>
+    </body>
+</html>

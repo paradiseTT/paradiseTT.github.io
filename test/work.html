@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+
+        }
+
+        .big {
+            /* border-style: solid;
+            border-width: 1px; */
+            width: 1000px;
+
+        }
+
+        ul {
+            overflow: hidden;
+
+        }
+
+        li {
+            list-style-type: none;
+            border-style: solid;
+            border-width: 1px;
+            width: 150px;
+            height: 150px;
+            float: left;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="big">
+        <ul>
+            <li>ID序号</li>
+            <li>菜品名称</li>
+            <li>用餐人数</li>
+            <li>烹饪时间</li>
+            <li>菜品描述</li>
+            <li>菜品图片</li>
+
+        </ul>
+    </div>
+</body>
+<script>
+    // 利用var str = prompt("请输入任意字符”,””)可以获取用户输入的字符，要求将用户输入的字符“反转顺序”后,再首尾字母转为大写，其他字母转为小写,最后把结果输出在页面上
+    var str1 = prompt("请输入任意字符”,")
+    // 反转
+    var arr = str1.split("").reverse().join("")
+    console.log(arr);
+    var arr1 = []
+    for (var i = 0; i < arr.length; i++) {
+        if (i == 0 || i == arr.length - 1) {
+            arr1.push(arr[i].toUpperCase())
+        } else {
+            arr1.push(arr[i].toLowerCase())
+        }
+    }
+    console.log(arr1);
+    document.write(arr1.join(""))
+
+
+    // 判断一个字符串 "abcoefoxyozzopp" 中出现次数最多的字符，并统计其出现的次数。
+    var str2 = "abcoefoxyozzopp"
+    var obj = {}
+    var arr = str2.split("")
+    for (var i = 0; i < arr.length; i++) {
+        if (obj[arr[i]]) {
+            obj[arr[i]]++
+        } else {
+            obj[arr[i]] = 1
+        }
+    }
+    var max = 0
+    var maxkey = ""
+    for (var key in obj) {
+        if (obj[key] > max) {
+            max = obj[key]
+            maxkey = key
+        }
+    }
+    console.log(obj, maxkey, max);
+
+
+    var arr = [{
+        id: 1,
+        name: "醋溜白菜",
+        peoplenum: "1-2人",
+        cookingtime: "10-20分钟",
+        content: "醋溜白菜，是北方人经常吃的一道菜，尤其是在多年前的冬天。那时，没有大棚菜，冬天，家家每天佐餐的基本上都是冬储大白菜，聪明的家庭主妇总是想方设法将这单调的菜变成多种菜式，于是，醋溜白菜被频繁的端上餐桌。",
+        pic: "http://api.jisuapi.com/recipe/upload/20160719/115138_46688.jpg"
+    },
+    {
+        id: 2,
+        name: "西红柿酸奶",
+        peoplenum: "1-2人",
+        cookingtime: "10-20分钟",
+        content: "新疆人爱吃西红柿那是有目共睹的，菜里面加西红柿的数不胜数，就连舌尖2在吐鲁番拍的葡萄干抓饭里面都加西红柿，更别说的新疆饭菜里面的西红柿了。拌面必须的加西红柿，各种新疆汤饭必须的加西红柿，平时的炒个青菜加西红柿都很正常。",
+        pic: "http://api.jisuapi.com/recipe/upload/20160719/115212_47636.jpg"
+    },
+    {
+        id: 3,
+        name: "冬瓜排骨汤",
+        peoplenum: "1-2人",
+        cookingtime: "30分钟-1小时",
+        content: "从今天起鱼鱼发的菜菜都是鱼鱼的减肥菜菜",
+        pic: "http://api.jisuapi.com/recipe/upload/20160719/115138_26193.jpg"
+    }
+    ];
+    var big = document.querySelector(".big")
+    var ul = document.querySelector("ul")
+    for (var i = 0; i < arr.length; i++) {
+
+        var str = ""
+        str += "<li>" + arr[i].id + "</li>"
+        str += "<li>" + arr[i].name + "</li>"
+        str += "<li>" + arr[i].peoplenum + "</li>"
+        str += "<li>" + arr[i].cookingtime + "</li>"
+        str += "<li>" + arr[i].content + "</li>"
+        str += "<li>" + "<img src=" + arr[i].pic + ">" + "</li>"
+
+        ul.innerHTML += str
+
+
+    }
+
+</script>
+
+</html>

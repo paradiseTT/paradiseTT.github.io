@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/clipboard.js/2.0.4/clipboard.min.js"></script>
+</head>
+
+<body>
+    <button>复制新文本</button>
+    <input type="text">
+</body>
+<script>
+    async function copyTextNew() {
+        await navigator.clipboard.writeText('这是新的要复制的文本');
+        console.log('文本已成功复制到剪贴板');
+    }
+    var btn = document.querySelector('button');
+    btn.onclick = function () {
+        copyTextNew()
+    }
+
+</script>
+
+</html>

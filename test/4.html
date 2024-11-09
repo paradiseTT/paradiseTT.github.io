@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+        span {
+            color: #fc0
+        }
+
+        .good {
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="rating-list">
+        <li class="rating-item">
+            <h3 class="username">用户名</h3>
+            <p>用户评论内容</p>
+            <span class="score">2.8</span>
+        </li>
+        <li class="rating-item">
+            <h3 class="username">某团用户</h3>
+            <p>这家饭店很好吃，菜品价格亲民。喜欢吃辣的小伙伴值得一试。</p>
+            <span class="score">4.5</span>
+        </li>
+        <li class="rating-item">
+            <h3 class="username">某饿了用户</h3>
+            <p>可能我吃不了辣，对于我来说太辣了</p>
+            <span class="score">1.8</span>
+        </li>
+        <li class="rating-item">
+            <h3 class="username">某点评用户</h3>
+            <p>同事们对这家店一致好评！已经是部门聚餐指定地点了</p>
+            <span class="score">4.9</span>
+        </li>
+    </ul>
+
+</body>
+<script>
+    var h3 = document.querySelectorAll('.rating-item h3');
+    var p = document.querySelectorAll('.rating-item p');
+    var span = document.querySelectorAll('.rating-item span');
+    for (var i = 0; i < span.length; i++) {
+        if (span[i].innerHTML >= 3) {
+            span[i].classList.add("good")
+            p[i].classList.add("good")
+            span[i].innerHTML="好评"+ span[i].innerHTML
+        }else{
+            span[i].innerHTML="差评"+ span[i].innerHTML
+        }
+    }
+</script>
+
+</html>

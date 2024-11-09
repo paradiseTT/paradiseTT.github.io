@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            width: 200px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+
+        }
+
+        ul.title {
+            width: 200px;
+            background-color: aliceblue;
+        }
+
+        li {
+            list-style: none;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        li.active {
+            display: block;
+        }
+
+
+
+        a.active {
+            background-color: aquamarine;
+            padding: 10px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="big">
+        <ul class="title">
+            <a class="active">公告</a>
+            <a>规则</a>
+            <a>论坛</a>
+            <a>安全</a>
+            <a>公益</a>
+        </ul>
+        <ul>
+            <li class="active cont">阿里云总裁胡晓明
+                云计算将成为新经济爆发点
+                天猫超市发放10亿红包
+                高圆圆跑步公开课</li>
+            <li class="cont">2016春节发货调整公告
+                广告法禁用语大全
+                邮费争议问题汇总
+                炒信规则调整意见</li>
+            <li class="cont">
+                趣解2016电商四大趋势
+                全职妈妈两年两皇冠
+                创业社区招募管理员
+                滥发信息体检工具</li>
+            <li class="cont">拉你进Q群微信刷单？
+                推荐店铺安全管理利器
+                谨防炒信”黑吃黑“
+                警方铲除炒信诈骗</li>
+            <li class="cont">公益宝贝获中华慈善奖
+                公益发展指数阿里五星
+                公益宝贝卖家发票索取
+                公益机构淘宝开店</li>
+        </ul>
+    </div>
+</body>
+<script>
+    var a = document.querySelectorAll('a');
+    var conts = document.querySelectorAll('.cont');
+    for (var i = 0; i < a.length; i++) {
+        a[i].setAttribute("index", i)
+        a[i].onclick = function () {
+
+            for (var j = 0; j < a.length; j++) {
+                a[j].classList.remove("active")
+                conts[j].classList.remove("active")
+            }
+            var aindex = this.getAttribute("index");
+            this.classList.add("active");
+            conts[aindex].classList.add("active");
+        }
+    }
+</script>
+
+</html>

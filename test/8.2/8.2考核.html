@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 1 -->
+    <!-- <script>
+        function fn(num) {
+            var str = num.toString().split('')
+            var arr = []
+            if (num < 10) {
+                console.log(num);
+
+            } else if (num > 10) {
+                for (let i = 0; i < str.length; i++) {
+                    arr.push(str[i])
+
+
+                }
+                for (let j = 0; j < arr.length; j++) {
+                    var str2 = ''
+                    str2 += arr[j] + arr[j - 1]
+                }
+                console.log(str2);
+            }
+
+        }
+        fn(55144)
+        fn(9)
+    </script> -->
+
+
+    <!-- 2 -->
+    <script>
+        //找出数组arr中重复出现过的元素,并进行升序排序
+        var arr1 = [1, 2, 4, 4, 3, 3, 1, 5, 3];
+
+        function foo(array) {
+
+            var obj = {};
+            for (let i = 0; i < array.length; i++) {
+                if (obj[array[i]]) {
+                    obj[array[i]]++;
+                } else {
+                    obj[array[i]] = 1;
+                }
+            }
+            // console.log(obj);
+
+            var arr2 = [];
+
+            // 遍历对象，只将出现次数大于1的元素添加到arr2数组中  
+            for (let num in obj) {
+                if (obj[num] > 1) {
+                    arr2.push(num);
+                }
+            }
+
+            // 对arr2数组进行排序  
+            arr2.sort((a, b) => a - b);
+
+            console.log(arr2);
+        }
+
+
+        foo(arr1)
+    </script>
+
+    <!-- 3 -->
+    <!-- <script>
+        // 编写js一个函数,提取url字符串中的参数,并以key-value的形式返回到一个对象结构中
+        function getUrlParam(url) {
+            var str = window.location.search
+            console.log(str);
+        }
+        var url = "https://item.taobao.com/item.html?a=1&b=2&c=&d=xxx&e"
+        getUrlParam(url)
+    </script> -->
+
+
+    <!-- 4 -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+        }
+
+        .big {
+            width: 1000px;
+            height: 610px;
+            margin: 100px auto;
+            overflow: hidden;
+            padding: 10px;
+            box-shadow: 0 0 5px black;
+            position: relative;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .left ul {
+            position: absolute;
+            top: 0;
+            transition: all .5s;
+        }
+
+        .right {
+            float: right;
+        }
+
+        .right ul {
+            position: relative;
+            top: 0;
+
+        }
+
+        .right li {
+            width: 150px;
+            margin: 7px 0;
+            opacity: .4;
+        }
+
+        .right li.active {
+            opacity: 1;
+        }
+
+        img {
+            margin-bottom: 8px;
+        }
+
+        .mask {
+            width: 152px;
+            height: 110px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border: solid red;
+            transition: all .5s;
+            /* z-index: -1; */
+        }
+
+        .c2 {
+            position: relative;
+        }
+
+        .mask img {
+            display: block;
+            width: 8px;
+            position: absolute;
+            left: -14px;
+            top: 25px;
+        }
+    </style>
+    <div class="big">
+        <div class="c2">
+            <div class="left">
+                <ul>
+                    <li><img src="./考核素材/images/t1.png" alt=""></li>
+                    <li><img src="./考核素材/images/t2.png" alt=""></li>
+                    <li><img src="./考核素材/images/t3.png" alt=""></li>
+                    <li><img src="./考核素材/images/t4.png" alt=""></li>
+                    <li><img src="./考核素材/images/t5.png" alt=""></li>
+                </ul>
+            </div>
+            <div class="right">
+                <ul>
+                    <li class="active"><img src="./考核素材/images/t1.png" alt=""></li>
+                    <li><img src="./考核素材/images/t2.png" alt=""></li>
+                    <li><img src="./考核素材/images/t3.png" alt=""></li>
+                    <li><img src="./考核素材/images/t4.png" alt=""></li>
+                    <li><img src="./考核素材/images/t5.png" alt=""></li>
+                    <div class="mask"><img src="./考核素材/1722587543169.png" alt=""></div>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        var big = document.querySelector('.big')
+        var left = document.querySelector('.left')
+        var right = document.querySelector('.right')
+        var ul = document.querySelector(' .left ul')
+        var li = document.querySelectorAll('.right li')
+        var mask = document.querySelector('.mask')
+        console.log(li);
+        for (var i = 0; i < li.length; i++) {
+            li[i].setAttribute('deta-index', i)
+            li[i].onclick = function () {
+                console.log(this);
+                for (var j = 0; j < li.length; j++) {
+                    li[j].classList.remove('active')
+                }
+                this.classList.add("active")
+                var index = this.getAttribute('deta-index')
+                mask.style.top = index * 115 + 'px'
+                ul.style.top = -index * 600 + 'px'
+                console.log(mask.style.top);
+            }
+
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jQuery.min.js"></script>
+    <style>
+        .big {
+            width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .c {
+            width: 300px;
+            height: 300px;
+            background-color: bisque;
+        }
+
+        p {
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="big">
+        <div class="c">
+            <p draggable="true">道法三千六百门</p>
+            <p draggable="true">人人各执一苗根</p>
+        </div>
+        <div class="c"></div>
+        <div class="c"></div>
+    </div>
+</body>
+<script>
+    var tuodongElement = null;
+    var p = document.querySelectorAll('p');
+    var c = document.querySelectorAll('.c');
+    $('p').on('mousedown', function (e) {
+        console.log(1);
+        tuodongElement = e.target
+    })
+    // for (let j = 0; j < p.length; j++) {
+    //     p[j].ondragstart = function (e) {
+    //         tuodongElement = e.target
+    //         console.log(1);
+
+    //     }
+
+    // }
+
+    $('.c').on('dragover', function (e) {
+        e.preventDefault();
+        console.log(2);
+
+    })
+    $('.c').on('drop', function (e) {
+        console.log(3);
+        $(this).append(tuodongElement);
+    })
+    // for (let i = 0; i < c.length; i++) {
+
+    //     c[i].ondragover = function (e) {
+    //         // 阻止默认行为
+    //         e.preventDefault();
+    //         console.log(2);
+
+    //     };
+    //     c[i].ondrop = function () {
+    //         console.log(3);
+
+
+
+    //         c[i].appendChild(tuodongElement);
+    //         tuodongElement = null;
+    //     }
+    // };
+</script>
+
+</html>

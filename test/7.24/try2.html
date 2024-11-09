@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .big {
+            width: 800px;
+            height: 800px;
+            background-color: aquamarine;
+        }
+
+        .c1 {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+            position: absolute;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="big"></div>
+    <script>
+        var big = document.querySelector('.big')
+        big.onclick = function (e) {
+            var c1 = document.createElement('div.c1')
+            c1.style.left = e.clientX + 'px'
+            c1.style.top = e.clientY + 'px'
+            big.appendChild(c1)
+        }
+    </script>
+</body>
+
+</html>

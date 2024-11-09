@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="lunbo.css">
+    <script src="./js/jquery-3.7.1.js"></script>
+    <style></style>
+</head>
+
+<body>
+    <div class="w">
+        <div class="banner">
+            <ul class="img">
+                <li><img src="./images/1.jpg" alt=""></li>
+                <li><img src="./images/2.jpg" alt=""></li>
+                <li><img src="./images/3.jpg" alt=""></li>
+                <li><img src="./images/4.jpg" alt=""></li>
+                <li><img src="./images/5.jpg" alt=""></li>
+            </ul>
+            <div class="btn">
+                <ul>
+                    <a class="active" href="">太空秘宝</a>
+                    <a href="">冠军皮肤</a>
+                    <a href="">魔女婕拉</a>
+                    <a href="">春季赛</a>
+                    <a href="">限时优惠</a>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <script>
+        var num = 1;
+        function lunbo() {
+
+            var timer = setInterval(function () {
+                if (num >= 5) {
+                    num = 0;
+                    $('.banner>ul').css("left", 0 + 'px');
+                }
+
+                $('.banner>ul').css("left", -num * 820 + 'px');
+                $('.banner').find('a').removeClass("active")
+                $('.banner').find('a').eq(num).addClass("active")
+
+
+                num++;
+            }, 2000);
+
+
+            $(".banner").mousemove(function () {
+                clearInterval(timer);
+            })
+
+            $(".banner").mouseout(function () {
+                console.log("出来了");
+
+                lunbo()
+            })
+
+            console.log($(".img"));
+
+        }
+
+        $(".banner").find('.btn>ul>a').mousemove(function () {
+            var index = $(this).index();
+
+            $('.banner>ul').css("left", -index * 820 + 'px');
+            $(this).addClass("active")
+            $(this).siblings().removeClass("active")
+        })
+
+        var bannerOppen = $('.banner>ul').animate({ left: 0 }, 1000, lunbo())
+
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.7.1.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .w {
+            width: 1200px;
+            margin: 24px auto;
+        }
+
+        .fenleixi {
+            overflow: hidden;
+        }
+
+        .fenleixi .top {
+            margin-bottom: 10px;
+            color: #A8A8A8;
+            float: left;
+            line-height: 2;
+            margin-right: 14px;
+            margin: 0 4px;
+            padding: 10px;
+        }
+
+        .right {
+            float: left;
+            line-height: 2;
+        }
+
+        .right li {
+            float: left;
+            margin: 0 4px;
+            padding: 10px;
+        }
+
+        li.active {
+            color: #32aaff;
+        }
+
+        .look {
+            overflow: hidden;
+            width: 1200px;
+        }
+
+        .look li {
+            margin: 20px 16px;
+            float: left;
+        }
+
+        .look li img {
+            margin-bottom: 6px;
+            width: 180px;
+            height: 240px;
+        }
+
+        .look li .text {
+            height: 37px;
+        }
+
+        .look .up {
+            margin-bottom: 2px;
+        }
+
+        .down {
+            color: rgba(0, 0, 0, .34);
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w">
+
+        <div class="fenlei">
+            <div class="fenleixi" data-category="styles">
+                <div class="top ">题材</div>
+                <div class="right">
+                    <ul>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="fenleixi" data-category="areas">
+                <div class="top ">地区</div>
+                <div class="right">
+                    <ul>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="fenleixi" data-category="status">
+                <div class="top ">进度</div>
+                <div class="right">
+                    <ul>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="fenleixi" data-category="prices">
+                <div class="top ">收费</div>
+                <div class="right">
+                    <ul>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="fenleixi" data-category="orders">
+                <div class="top ">排序</div>
+                <div class="right">
+                    <ul>
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="look">
+
+        </div>
+    </div>
+</body>
+<script src="./js/AllLabel.js"></script>
+<script>
+
+
+
+    for (var key in AllLabel) {
+        $('.fenleixi[data-category="' + key + '"] .right ul').empty();
+        var $ul = $('.fenleixi[data-category="' + key + '"] .right ul');
+
+        AllLabel[key].forEach(function (item) {
+            $ul.append('<li>' + item.name + '</li>');
+        });
+
+        console.log(AllLabel[key][0].id);
+        look()
+        function look() {
+
+            $.get(
+                'https://apis.netstart.cn/bcomic/ClassPage', {
+                styleId: -1,
+                areaId: -1,
+                isFinish: -1,
+                order: 0,
+                pageNum: 1,
+                pageSize: 39,
+                isFree: -1
+            },
+                function (res) {
+                    console.log(res);
+                    var data = res.data
+                    console.log('data--', data);
+                    console.log(data[0].vertical_cover);
+
+                    for (let i = 0; i < data.length; i++) {
+
+
+                        var str = ''
+                        str += '<ul>'
+                        if (!data[i].vertical_cover) {
+                            str += ' <li><img src="./imgs/no-find.png"alt="">'
+
+                        }
+                        str += ' <li><img src="' + data[i].vertical_cover + '"alt="">'
+                        if (data[i].is_finish == 1) {
+                            var finish = '完结'
+                        } else {
+                            var finish = data[i].last_ord + "章"
+                        }
+                        str += '<div class="text">' +
+                            '<div class="up">' + data[i].title + '</div>' +
+                            ' <div class="down">' + finish + '</div></div></li></ul>'
+                        console.log(str);
+
+                        $('.look').append(str)
+                    }
+                },
+            )
+
+        }
+    }
+
+
+
+    var li = document.querySelectorAll('.right ul li');
+    var ul = document.querySelectorAll('.right ul')
+    for (let i = 0; i < li.length; i++) {
+        ul.id = i
+        li[i].onclick = function (e) {
+
+            console.log(ul);
+            console.log(this.parentNode);
+
+            var index = this.parentNode.classList
+            for (let j = 0; j < li.length; j++) {
+                li[index].classList.remove('active')
+            }
+            console.log(this);
+
+
+            this.classList.add('active');
+
+        }
+
+    }
+
+</script>
+
+</html>

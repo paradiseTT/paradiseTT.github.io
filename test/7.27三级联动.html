@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/AllSchool.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .w {
+            margin: 0 auto;
+            width: 600px;
+            background-color: #EFF7FE;
+            padding: 50px;
+        }
+
+        span {
+            /* color: rgb(58, 84, 153); */
+            color: #28B5F4;
+            margin-right: 10px;
+            border-right-style: solid;
+            border-color: #D2CED5;
+            border-width: 1px;
+            padding-right: 10px;
+
+        }
+
+        select {
+            width: 80%;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .c {
+            margin: 20px;
+            background-color: #FEFEFE;
+            padding: 10px;
+            border-radius: 10px;
+
+        }
+
+        .text {
+            overflow: hidden;
+            color: red;
+        }
+
+        .text div {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w">
+        <div class="c">
+            <span>省份</span><label for=""><select name="sheng" id="">
+                </select></label>
+        </div>
+        <div class="c">
+            <span>城市</span><label for=""><select name="cheng" id=""></select></label>
+        </div>
+        <div class="c">
+            <span>学校</span><label for=""><select name="xue" id=""></select></label>
+        </div>
+        <div class="text">
+            <div class="sf">北京市-</div>
+            <div class="cs">贵阳市-</div>
+            <div class="xs">四川希望汽车职业学院</div>
+        </div>
+    </div>
+</body>
+<script>
+    function $(cssStr) {
+        var dom = document.querySelectorAll(cssStr);
+        if (dom.length == 1) {
+            return dom[0]
+        } if (dom.length == 0) {
+            return null
+
+        }
+        return dom
+
+    }
+
+    var shengFen = $('select')[0]
+    // console.log(shengFen.name);
+    var chengShi = $('select')[1]
+    // console.log(chengShi.name);
+    var xueXiao = $('select')[2]
+    for (var i = 0; i < province.length; i++) {
+        var str1 = ''
+        str1 += '<option value=' + province[i][0] + '>' + province[i][1] + '</option>'
+        // console.log(str);
+
+        shengFen.innerHTML += str1
+
+    }
+    for (var key in city) {
+
+        var cities = city[key];
+        for (var i = 0; i < cities.length; i++) {
+            var cityInfo = cities[i];
+            // console.log("省份/直辖市编号: " + key + ", 城市编号: " + cityInfo[0] + ", 城市名: " + cityInfo[1]);
+
+            var str = ''
+            str += '<option value=' + cityInfo[0] + '>' + cityInfo[1] + '</option>'
+            chengShi.innerHTML += str
+
+        }
+
+    }
+    for (var schoolCode in allschool) {
+
+        var schools = allschool[schoolCode];
+        for (var i = 0; i < schools.length; i++) {
+            var schoolInfo = schools[i];
+            // console.log("学校编号: " + schoolCode + ", 学校名称: " + schoolInfo[2]);
+            var str = ''
+            str += '<option value=' + schoolCode + '>' + schoolInfo[2] + '</option>'
+            xueXiao.innerHTML += str
+        }
+
+    }
+
+    var sf = document.querySelector('.sf')
+    console.log(sf);
+    console.log(sf.innerHTML);
+    var cs = $('.cs')
+    var xs = $('.xs')
+
+
+    var shengFenOptions = $('select')[0].options
+
+    // console.log(shengFenOptions.length);
+    shengFen.onclick = function () {
+        var shengFenOptionsIndex = shengFenOptions.selectedIndex
+        // console.log(shengFenOptions[i].text);
+        // console.log(shengFenOptionsIndex);
+        var infoText = shengFenOptions[shengFenOptionsIndex].text
+        console.log(infoText);
+        sf.innerHTML = infoText + '-'
+
+    }
+    // console.log(sf.innerHTML);
+    var chengShiOptions = $('select')[1].options
+
+    // console.log(shengFenOptions.length);
+    chengShi.onclick = function () {
+        var chengShiOptionsIndex = chengShiOptions.selectedIndex
+        // console.log(shengFenOptions[i].text);
+        console.log(chengShiOptionsIndex);
+        var infoText = chengShiOptions[chengShiOptionsIndex].text
+        console.log(infoText);
+        cs.innerHTML = infoText + '-'
+
+    }
+
+    var xueXiaoOptions = $('select')[2].options
+    xueXiao.onclick = function () {
+        var xueXiaoOptionsIndex = xueXiaoOptions.selectedIndex
+        console.log(xueXiaoOptionsIndex);
+        var infoText = xueXiaoOptions[xueXiaoOptionsIndex].text
+        console.log(infoText);
+        xs.innerHTML = infoText
+    }
+
+
+
+</script>
+
+</html>

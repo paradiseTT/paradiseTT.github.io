@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>css3画太极图</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .taiji {
+            width: 500px;
+            height: 500px;
+            position: relative;
+            margin: 100px auto;
+            background-color: black;
+            border-radius: 500px;
+        }
+
+        .taiji:before,
+        .taiji:after {
+            width: 250px;
+            height: 500px;
+            position: absolute;
+            top: 0;
+            display: block;
+            content: "";
+        }
+
+        .taiji:before {
+            left: 0;
+            border-radius: 250px 0 0 250px;
+            background-color: #000;
+        }
+
+        .taiji:after {
+            right: 0;
+            border-radius: 0 250px 250px 0;
+            background-color: #fff;
+        }
+
+        .left,
+        .right {
+            width: 250px;
+            height: 250px;
+            position: absolute;
+            z-index: 2;
+            border-radius: 375px;
+        }
+
+        .left {
+            top: 0;
+            left: 125px;
+            background-color: #000;
+        }
+
+        .right {
+            bottom: 0;
+            right: 125px;
+            background-color: #fff;
+        }
+
+        .left:after,
+        .right:after {
+            width: 100px;
+            height: 100px;
+            z-index: 3;
+            position: absolute;
+            display: block;
+            content: "";
+            border-radius: 100px;
+        }
+
+        .left:after {
+            top: 75px;
+            left: 75px;
+            background-color: #fff;
+        }
+
+        .right:after {
+            bottom: 75px;
+            right: 75px;
+            background-color: #000;
+        }
+
+
+
+        .taiji:hover {
+            transform: rotate(360000000000000000000000000000000turn);
+            transition: all 5000000000000s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="taiji">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+</body>
+
+</html>

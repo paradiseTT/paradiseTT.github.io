@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .w {
+            width: 1200px;
+            height: 600px;
+            background-color: skyblue;
+            margin: 0px auto;
+            text-align: center;
+            font-size: 50px;
+        }
+
+        .c {
+            width: 1200px;
+            height: 800px;
+            background-color: skyblue;
+
+            text-align: center;
+            font-size: 50px;
+            position: relative;
+            box-shadow: 0 0 3px black;
+        }
+
+        .nav {
+            width: 60px;
+
+            background-color: skyblue;
+            position: fixed;
+            right: 10px;
+            top: 40%;
+        }
+
+
+
+        li {
+
+            height: 50px;
+
+            border: 1px grey solid;
+
+        }
+
+        li.active {
+            border: 1px red solid;
+            background-color: red;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w">
+        <div class="c">-------------------1------------------</div>
+        <div class="c">-------------------2-------------------</div>
+        <div class="c">-------------------3------------------</div>
+        <div class="c">-------------------4------------------</div>
+        <div class="c">-------------------5------------------</div>
+    </div>
+    <div class="nav">
+        <ul>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>top</li>
+        </ul>
+    </div>
+
+
+
+
+
+
+
+
+    <script>
+        var cc = document.querySelectorAll(".c")
+        var lis = document.querySelectorAll("li")
+
+
+        window.onscroll = function scroll() {
+
+            var height = document.documentElement.scrollTop
+            ScrollBarlen = document.body.clientHeight - document.body.scrollTop
+
+            console.log(document.body.clientHeight);
+            console.log(height);
+            for (var i = 0; i < lis.length; i++) {
+
+                lis[i].setAttribute("data-index", i)
+
+                if (height >= (800 * i) * (4 / 5)) {
+                    for (let j = 0; j < lis.length; j++) {
+                        lis[j].classList.remove("active")
+                    }
+                    lis[i].classList.add("active")
+
+                }
+            }
+
+        }
+        function lisonclick(i) {
+
+
+
+            var index = lis[i].getAttribute("dindex")
+            lis[i].onclick = function () {
+
+                // setTimeout(this.classList.add("active"), 500)
+
+                setTimeout(function () {
+
+
+                    for (var j = 0; j < lis.length; j++) {
+
+                        lis[j].classList.remove("active")
+                    }
+
+
+                    this.classList.add("active")
+                }.bind(this), 700)
+
+                // document.getElementById("myDIV").addEventListener("transitionend", scroll);
+
+
+                window.scroll({
+                    top: 800 * i,
+                    behavior: "smooth"
+                })
+
+
+            }
+
+
+
+        }
+
+
+        var lis1 = lisonclick(0)
+        var lis2 = lisonclick(1)
+
+        var lis3 = lisonclick(2)
+        var lis4 = lisonclick(3)
+        var lis5 = lisonclick(4)
+        lis[5].onclick = function () {
+            for (var j = 0; j < lis.length; j++) {
+                // lis[j].classList.remove("active")
+            }
+            // this.classList.add("active")
+            window.scroll({
+                top: 0,
+                behavior: "smooth"
+            })
+
+
+        }
+
+
+
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>

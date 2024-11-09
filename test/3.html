@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .big {
+            width: 800px;
+            height: 500px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .left {
+            width: 350px;
+            padding: 10px;
+            background-color: bisque;
+            float: left;
+        }
+
+        .right {
+            width: 350px;
+            height: 100%;
+            padding: 10px;
+            background-color: bisque;
+            float: right;
+        }
+
+        .input {
+            width: 300px;
+            height: 200px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid black;
+            outline: none;
+        }
+
+        .fabu {
+            width: 300px;
+            height: 40px;
+            margin: 5px;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="big">
+        <div class="left">
+            <h1>
+                粤嵌贴吧
+            </h1>
+            <ul>
+                <li>标题<input class="title" type="text" placeholder="请输入标题（1-12位）"></li>
+                <li>作者<input class="author" type="text" placeholder="输入作者（1-16位）"></li>
+                <li>内容<input class="input" type="text" placeholder="输入内容（10-200位）"></li>
+                <button class="fabu">发布</button>
+            </ul>
+        </div>
+        <div class="right">
+
+        </div>
+
+    </div>
+
+</body>
+<script>
+    var title = document.querySelector('.title');
+    var author = document.querySelector('.author');
+    var input = document.querySelector('.input');
+    var fabu = document.querySelector('.fabu');
+    var right = document.querySelector('.right');
+
+
+    fabu.onclick = function () {
+        var textTitle = title.value;
+        var textAuthor = author.value;
+        var textInput = input.value;
+
+        var str = ""
+        str = "标题" + textTitle + "<hr>" + "作者" + textAuthor + "<hr>" + "内容" + textInput;
+        right.innerHTML = str;
+
+        title.value = "";
+        author.value = "";
+        input.value = "";
+    }
+</script>
+
+</html>

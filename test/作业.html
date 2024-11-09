@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="c1">
+        <h4>操作选项</h4>
+        <input type="text" placeholder="请输入需要添加的项"><button>添加</button>
+        <div class="button">
+            <button name="all">全选</button>
+            <button name="none">全不选</button>
+            <button name="reverse">反选</button>
+            <button name="del">删除所选</button>
+        </div>
+        <ul>
+            <li><input type="checkbox" />家里没宽带</li>
+            <li><input type="checkbox" />网速不够快</li>
+            <li><input type="checkbox" />手机没流量</li>
+            <li><input type="checkbox" />学校无wifi</li>
+        </ul>
+    </div>
+</body>
+<script>
+    var buttonAdd = document.querySelector(".c1 button")
+    var btttons = document.querySelectorAll(".c1 .button button")
+    var ul = document.querySelector(".c1 ul")
+    var input = document.querySelector(".c1 input")
+    buttonAdd.onclick = function () {
+        var li = document.createElement("li")
+        var checkbox = document.createElement("input")
+        checkbox.type = "checkbox"
+        var text = document.createTextNode(input.value)
+        li.appendChild(checkbox)
+        li.appendChild(text)
+        ul.appendChild(li)
+        input.value = ""
+    }
+    var buttonAll = document.querySelector("button[name='all']")
+    var buttonNone = document.querySelector("button[name='none']")
+    var buttonReverse = document.querySelector("button[name='reverse']")
+    var buttonDel = document.querySelector("button[name='del']")
+
+    var ul = document.querySelector("ul")
+    var li = document.querySelectorAll("li")
+    buttonAll.onclick = function () {
+        var checkbox = document.querySelectorAll("input[type='checkbox']")
+        for (var i = 0; i < checkbox.length; i++) {
+
+            checkbox[i].checked = true
+
+        }
+    }
+    buttonNone.onclick = function () {
+        for (var i = 0; i < checkbox.length; i++) {
+            checkbox[i].checked = false
+            console.log(checkbox.length);
+        }
+    }
+    buttonReverse.onclick = function () {
+        for (var j = 0; j < checkbox.length; j++) {
+            checkbox[j].checked = !checkbox[j].checked
+        }
+    }
+    buttonDel.onclick = function () {
+        for (var k = 0; k < checkbox.length; k++) {
+            if (checkbox[k].checked == true) {
+                ul.removeChild(li[k])
+            }
+
+        }
+    }
+</script>
+
+</html>

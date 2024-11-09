@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>仿王者荣耀英雄列表选项卡</title>
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="css/base.css" />
+        <link rel="stylesheet" href="css/index.css" />
+    </head>
+    <body>
+        <!-- 英雄介绍层开始 -->
+        <div class="herolist">
+            <!-- 版心 -->
+            <div class="w">
+                <!-- 标题部分 -->
+                <!-- <div class="herolist-title"><h2>英雄介绍</h2></div> -->
+                <!-- 导航部分 -->
+                <!-- <div class="herolist-nav clearfix">
+				<ul>
+					<li class="active"><a href="#">英雄</a></li>
+					<li><a href="https://pvp.qq.com/web201605/item.shtml" target="_blank">局内道具</a></li>
+					<li><a href="https://pvp.qq.com/web201605/summoner.shtml" target="_blank">召唤师技能</a></li>
+				</ul>
+			</div> -->
+
+                <!-- 英雄主要内容部分 -->
+                <div class="herolist-box">
+                    <!-- 英雄类型部分 -->
+                    <div class="herolist-types">
+                        <ul class="types-left">
+                            <li>综合</li>
+                            <li>定位</li>
+                        </ul>
+
+                        <ul class="types-name">
+                            <!-- <li>
+                                <span><i></i></span>本周免费
+                            </li>
+                            <li>
+                                <span><i></i></span>新手推荐
+                            </li> -->
+                        </ul>
+
+                        <ul class="types-name">
+                            <!-- <li class="active">
+                                <span><i></i></span>全部
+                            </li>
+                            <li>
+                                <span><i></i></span>坦克
+                            </li>
+                            <li>
+                                <span><i></i></span>战士
+                            </li>
+                            <li>
+                                <span><i></i></span>刺客
+                            </li>
+                            <li>
+                                <span><i></i></span>法师
+                            </li>
+                            <li>
+                                <span><i></i></span>射手
+                            </li>
+                            <li>
+                                <span><i></i></span>辅助
+                            </li> -->
+                        </ul>
+
+                        <div class="herosearch">
+                            <input type="text" placeholder="请输入你想要搜索的英雄名" />
+                            <a href="#"></a>
+                        </div>
+                    </div>
+                    <!-- 英雄内容部分 -->
+                    <div class="herolist-content">
+                        <ul class="clearfix">
+                            <!-- <li>
+                                <a href="https://pvp.qq.com/web201605/herodetail/515.shtml" target="_blank">
+                                    <img src="https://game.gtimg.cn/images/yxzj/img201606/heroimg/515/515.jpg" />
+                                    嫦娥
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://pvp.qq.com/web201605/herodetail/515.shtml" target="_blank">
+                                    <img src="https://game.gtimg.cn/images/yxzj/img201606/heroimg/515/515.jpg" />
+                                    嫦娥
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://pvp.qq.com/web201605/herodetail/515.shtml" target="_blank">
+                                    <img src="https://game.gtimg.cn/images/yxzj/img201606/heroimg/515/515.jpg" />
+                                    嫦娥
+                                </a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 引入数据文件 -->
+        <script src="./js/herolist.js"></script>
+        <script>
+            // 封装一个获取dom对象的函数
+            function $(cssStr) {
+                var dom = document.querySelectorAll(cssStr);
+                if (dom.length === 0) {
+                    return null;
+                }
+
+                if (dom.length === 1) {
+                    return dom[0];
+                }
+
+                return dom;
+            }
+            // 英雄列表数据
+            // console.log(heroList);
+            // 英雄类型
+            // console.log(heroTypes);
+            // pType类型
+            // console.log(pTypes);
+
+            // 获取dom对象
+            var herolistContentUl = $(".herolist-content ul");
+
+            // 翻转数组
+            heroList.reverse();
+
+            // 封装一个函数,根据英雄列表数据,渲染英雄列表
+            function renderHeroList(heroListData) {
+                herolistContentUl.innerHTML = heroListData
+                    .map(function (item) {
+                        var str = "";
+                        str += "<li>";
+                        str += '<a href="https://pvp.qq.com/web201605/herodetail/' + item.id_name + '.shtml" target="_blank">';
+                        str += '<img src="https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + item.ename + "/" + item.ename + '.jpg" />';
+                        str += item.cname;
+                        str += "</a>";
+                        str += "</li>";
+                        return str;
+                    })
+                    .join("");
+            }
+
+            // 渲染英雄列表
+            renderHeroList(heroList);
+
+            // 渲染综合类型
+            $(".herolist-types .types-name")[0].innerHTML = pTypes
+                .map(function (item) {
+                    var str = "";
+                    str += "<li data-ptype='" + item.id + "'>";
+                    str += "<span><i></i></span>" + item.ptype;
+                    str += "</li>";
+                    return str;
+                })
+                .join("");
+
+            // 渲染定位类型
+            $(".herolist-types .types-name")[1].innerHTML = heroTypes
+                .map(function (item) {
+                    var str = "";
+                    if (item.id === 0) {
+                        str += "<li class='active' data-type='0'>";
+                    } else {
+                        str += "<li data-type='" + item.id + "'>";
+                    }
+                    str += "<span><i></i></span>" + item.type;
+                    str += "</li>";
+                    return str;
+                })
+                .join("");
+
+            // 获取.types-name里面的所有li
+            var typesNamelis = $(".herolist-types .types-name li");
+            // 循环
+            for (var i = 0; i < typesNamelis.length; i++) {
+                typesNamelis[i].onclick = function () {
+                    for (var j = 0; j < typesNamelis.length; j++) {
+                        // 删除高亮类名
+                        typesNamelis[j].classList.remove("active");
+                    }
+
+                    // 添加高亮类名
+                    this.classList.add("active");
+
+                    // 获取li身上的自定义属性
+                    var ptypeIndex = this.dataset.ptype;
+                    var typeIndex = this.dataset.type;
+
+                    if (ptypeIndex !== undefined) {
+                        // 筛选数据
+                        var targetHeroList = heroList.filter(function (item) {
+                            return item.pay_type == ptypeIndex;
+                        });
+                    }
+
+                    if (typeIndex !== undefined) {
+                        if (typeIndex == 0) {
+                            var targetHeroList = heroList;
+                        } else {
+                            // 筛选数据
+                            var targetHeroList = heroList.filter(function (item) {
+                                return item.hero_type == typeIndex || item.hero_type2 == typeIndex;
+                            });
+                        }
+                    }
+
+                    // 渲染英雄列表
+                    renderHeroList(targetHeroList);
+                };
+            }
+
+            // 给文本绑定input输入事件
+            $(".herosearch input").addEventListener("input", function () {
+                // 获取输入的内容
+                var keyword = this.value;
+                // 根据输入的内容去数组中筛选目标数据
+                var targetHeroList = heroList.filter(function (item) {
+                    return item.cname.indexOf(keyword) != -1;
+                });
+                // 渲染英雄列表
+                renderHeroList(targetHeroList);
+
+                for (var j = 0; j < typesNamelis.length; j++) {
+                    // 删除高亮类名
+                    typesNamelis[j].classList.remove("active");
+                }
+
+                // 添加高亮类名
+                typesNamelis[2].classList.add("active");
+            });
+        </script>
+    </body>
+</html>

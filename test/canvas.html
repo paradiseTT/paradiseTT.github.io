@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .c {
+            width: 600px;
+            margin: 0 auto;
+
+        }
+
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="c">
+        <canvas width="500" height="500"></canvas>
+    </div>
+</body>
+<script>
+    var mycanvas = document.querySelector('canvas');
+    var ctx = mycanvas.getContext('2d');
+    function draw(x, y) {
+        ctx.beginPath()
+        ctx.arc(x, y, 10, 0, 2 * Math.PI)
+        ctx.fillStyle = 'red'
+        ctx.fill()
+        console.log(x, y);
+
+    }
+    var x = 100
+    var y = 100
+    var speedX = 1
+    var speedY = 2
+    setInterval(function () {
+        ctx.clearRect(0, 0, 500, 500)
+        x += speedX
+        y += speedY
+        if (x > 490 || x < 10) {
+            speedX = -speedX
+
+        }
+        if (y > 490 || y < 10) {
+            speedY = -speedY
+
+        }
+        draw(x, y)
+    }, 30)
+    function Draw() { }
+</script>
+
+</html>

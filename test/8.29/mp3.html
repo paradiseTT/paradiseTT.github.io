@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.7.1.min.js"></script>
+    <style>
+        .c {
+            /* background-image: url(./images/page-bg.jpg); */
+            /* width: 1000px;
+            height: 1000px; */
+            width: 1400px;
+            position: relative;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            /* position: absolute; */
+        }
+
+        .center {
+            position: absolute;
+            top: 85px;
+            left: 86px;
+            width: 230px;
+            /* transform: translate(-50%, -50%); */
+        }
+
+        .yuan {
+            position: absolute;
+            top: 110px;
+            left: 38%;
+            border-radius: 50%;
+            width: 400px;
+            height: 400px;
+            /* transform: translate(-50%, -50%); */
+        }
+
+        .btn {
+            position: absolute;
+            top: 44%;
+            left: 52%;
+            /* transform: translate(-50%, -50%); */
+            /* width: 50px;
+            height: 50px; */
+            background-color: rgba(red, green, blue, .7);
+
+        }
+
+        a {
+            color: white;
+            cursor: pointer;
+            text-decoration: none
+        }
+
+        .text {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .active {
+            animation-name: zhuan;
+            animation-duration: 10s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes zhuan {
+            from {
+                transform: rotate(0deg);
+                /* transform: translate(-50%, -50%); */
+            }
+
+            to {
+                transform: rotate(360deg);
+                /* transform: translate(-50%, -50%); */
+            }
+        }
+
+        a {
+            background-image: url(./images/pause.png);
+            display: block;
+            width: 30px;
+            height: 30px;
+        }
+
+        a.play {
+            background-image: url(./images/play.png);
+        }
+
+        audio {
+            position: absolute;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="c">
+
+        <img src="./images/page-bg.jpg" alt="">
+        <div class="text">歌名</div>
+        <div class="yuan active">
+
+            <img src="./images/bg_circle.png" alt="">
+            <div class="center">
+                <img src="./images/bg_center.png" alt="">
+
+            </div>
+        </div>
+        <div class="btn"><a class="play"> </a></div>
+    </div>
+    <audio src="./media/aini.mp3" controls autoplay></audio>
+    <button>切换歌曲</button>
+</body>
+<script>
+    $('a').on('click', function () {
+        $(this).toggleClass('play')
+        $('.yuan').toggleClass('active')
+        $('audio')[0].paused ? $('audio')[0].play() : $('audio')[0].pause()
+    });
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://api.uomg.com/api/rand.music?sort=热歌榜&format=json");
+    xhr.send();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+
+            var res = JSON.parse(xhr.responseText);
+            var data = res.data;
+
+            console.log(data);
+            $(".text").text(data.name)
+
+            $('audio').attr('src', data.url)
+            console.log(data.url);
+            $('.center img').attr('src', data.picurl)
+
+
+            $('button').on("click", function () {
+                console.log('qo');
+                xhr.open("GET", "https://api.uomg.com/api/rand.music?sort=热歌榜&format=json");
+                xhr.send();
+                $('audio').attr('src', data.url)
+                // $('a').click()
+                $('audio').play()
+            })
+        }
+    }
+
+</script>
+
+</html>
