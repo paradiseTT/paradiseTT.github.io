@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="slide">
+            <li><img src="3.jpg" alt="" /></li>
+            <li><img src="1.jpg" alt="" /></li>
+            <li><img src="2.jpg" alt="" /></li>
+            <li><img src="3.jpg" alt="" /></li>
+            <li><img src="1.jpg" alt="" /></li>
+
+        </ul>
+        <div class="btn">
+            <button>prev</button>
+            <button>next</button>
+        </div>
+        <ul class="dots">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+
+    <style>
+        .box {
+            width: 200px;
+            /* overflow: hidden; */
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: flex;
+            justify-content: space-between;
+            width: 200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .box ul.slide {
+            width: 1000px;
+            margin: 0;
+
+            padding: 0;
+            list-style: none;
+            display: flex;
+            position: relative;
+            left: -200px;
+            transition: all 1s;
+        }
+
+        ul li {
+            background-color: red;
+        }
+
+        ul li img {
+            width: 200px;
+            display: block;
+            /* vertical-align: middle; */
+        }
+
+        .dots li {
+            width: 20px;
+            height: 20px;
+            background-color: gray;
+            margin: 5px;
+            border-radius: 50%;
+        }
+
+        .dots li.active {
+            background-color: red;
+        }
+    </style>
+    <script>
+        var ulSlide = document.querySelector('.slide');
+        var prev = document.querySelectorAll('button')[0]
+        var next = document.querySelectorAll('button')[1]
+        let i = 1
+        prev.onclick = function () {
+            console.log(i);
+
+            // ulSlide.style.transition = ''
+            i--
+            ulSlide.style.left = i * -200 + 'px'
+
+        }
+        next.onclick = function () {
+            console.log(i);
+
+            i++
+            // ulSlide.style.left = i * -200 + 'px'
+            if (i === 3) {
+                ulSlide.style.transition = 'none'
+                ulSlide.style.left = 0 + 'px'
+                i = 0
+
+            } else {
+
+                ulSlide.style.transition = 'all 1s'
+            }
+            ulSlide.style.left = i * -200 + 'px'
+        }
+
+    </script>
+
+
+</body>
+
+</html>

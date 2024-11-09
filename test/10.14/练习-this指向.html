@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <script>
+            var person = {
+                name: "nick",
+                age: 17,
+                "xx-yy": "123456",
+                greet: function () {
+                    console.log("hello world");
+                    console.log("hello world", this);
+                },
+            };
+
+            console.log(person);
+            console.log(person["xx-yy"]);
+            console.log(person.greet);
+            person.greet(); // this就是 person本身
+        </script> -->
+
+    <!-- <script>
+            var nick = {
+                name: "nick",
+                age: 17,
+            };
+            var lily = {
+                name: "lily",
+                age: 18,
+            };
+            function greet() {
+                console.log("hello world", this);
+            }
+
+            nick.greet = greet;
+            lily.greet = greet;
+
+            console.log(nick, lily);
+
+            console.log(nick.greet === lily.greet);
+            console.log(nick.greet === greet);
+
+            // greet();
+            window.greet();
+            nick.greet();
+            lily.greet();
+        </script> -->
+
+    <script>
+        var nick = {
+            name: "nick",
+            age: 17,
+            greet: function () {
+                console.log("hello world", this);
+            },
+        };
+
+        nick.greet();
+        window.greet = nick.greet;
+        greet()
+
+    </script>
+
+</body>
+
+</html>

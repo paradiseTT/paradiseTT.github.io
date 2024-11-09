@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var Person = function (name, age) {
+            this.name = name;
+            this.age = age;
+        };
+        var n = new Person("nick", 17);
+
+        console.log("n", n);
+        console.log(n.name, n.age);
+
+        var n1 = new Person("mark", 18);
+        console.log("n1", n1);
+
+
+        Person.prototype.sayHi = function () {
+            console.log("hi", this);
+        };
+
+
+        console.log(n.sayHi === n.__proto__.sayHi);
+
+        console.log(n.sayHi === n1.sayHi, n.sayHi === Person.prototype.sayHi);
+
+        n.sayHi();
+        n1.sayHi();
+
+
+        var yy = n.sayHi;
+        console.log('xxxxxxxxx');
+
+        yy(); 
+    </script>
+
+    <!-- <script>
+            var xx = function (name, age) {
+                return {
+                    name: name,
+                    age: age,
+                    sayHi: function () {
+                        console.log("hi");
+                    },
+                };
+            };
+            var j = xx("jim", 27);
+            var i = xx("iii", 28);
+            console.log(j);
+            console.log(i);
+        </script> -->
+</body>
+
+</html>

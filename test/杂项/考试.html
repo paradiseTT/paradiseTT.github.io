@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function huiwen(zhengshu) {
+        zhengshu = zhengshu + ''
+        console.log(zhengshu == zhengshu.split('').reverse().join(''));
+
+    }
+    huiwen(1234321)
+    huiwen(12343212)
+
+
+    function maxnum(arr) {
+        var obj = {}
+        for (var i = 0; i < arr.length; i++) {
+
+            obj[arr[i]] = obj[arr[i]] ? obj[arr[i]] + 1 : 1
+            console.log(obj);
+
+        }
+        var max = 0
+        var key = 0
+        for (var k in obj) {
+            if (obj[k] > max) {
+                max = obj[k]
+            }
+        }
+        console.log(obj);
+
+        console.log(max);
+
+    }
+    //打印数组中出现次数最多的数
+
+    maxnum([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])
+
+
+
+    function chafn(data, data2) {
+        var dayms1 = new Date(data).getTime()
+        var dayms2 = new Date(data2).getTime()
+        var chazhi = Math.floor(Math.abs(dayms1 - dayms2) / 1000 / 60 / 60 / 24)
+        return chazhi
+    }
+    console.log(chafn('2024-01-01', '2024-01-15'));
+</script>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .w {
+            width: 500px;
+            margin: 50px auto;
+            text-align: center;
+            color: white;
+        }
+
+        .box {
+            border-radius: 20px;
+            background-color: #5A52C2;
+            padding: 30px;
+            font-size: 25px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w"></div>
+</body>
+<script>
+    // 创建原型
+    var CountDown = function CountDown(year, month, day, hour, minute, second) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
+        this.endDate = new Date(year + '/' + month + '/' + day + ' ' + hour + ':' + minute + ':' + second);
+    }
+    // 在原型上添加方法 创建盛放倒计时的盒子并命名
+    CountDown.prototype.createBox = function (boxName) {
+        this.boxName = boxName;
+        this.box = document.createElement('div');
+        this.box.classList.add(boxName);
+        this.box.classList.add('box');
+        let wBox = document.querySelector('.w');
+        wBox.appendChild(this.box);
+    };
+    // 在原型上添加方法 倒计时函数
+    CountDown.prototype.CountTime = function () {
+        let now = new Date().getTime();//获取现在时间到1970年1月1日的毫秒数
+        let getEndDAteYear = this.endDate.getFullYear();// 设置终点时间
+        let getEndDAteMonth = this.endDate.getMonth() + 1;// 从终点时间获取年份
+        let getEndDAteDay = this.endDate.getDate();// 从终点时间获取月份
+        let end = this.endDate.getTime();// 获取终点时间到1970年1月1日的毫秒数
+        let remainingTime = end - now;
+        let d, h, m, s;// 声明 天 小时 分钟 秒
+        if (remainingTime >= 0) {// 计算
+            // 如果倒计时有剩余
+            d = Math.floor(remainingTime / 1000 / 60 / 60 / 24);
+            h = Math.floor(remainingTime / 1000 / 60 / 60 % 24);
+            m = Math.floor(remainingTime / 1000 / 60 % 60);
+            s = Math.floor(remainingTime / 1000 % 60);
+            // 三目运算符 如果小于10 则补零
+            h = h < 10 ? "0" + h : h;
+            m = m < 10 ? "0" + m : m;
+            s = s < 10 ? "0" + s : s;
+            // 显示倒计时
+            let str = `距离 <strong>${getEndDAteYear} 年 ${getEndDAteMonth} 月 ${getEndDAteDay} 日</strong> 还有<br><br>${d} 天 ${h} : ${m} : ${s}`;
+            var box = document.querySelector(`.${this.boxName}`);
+            box.innerHTML = str;
+        } else {// 如果倒计时归零
+            str = '时间到！请重设倒计时';
+            var box = document.querySelector(`.${this.boxName}`);
+            box.innerHTML = str;// 将倒计时显示在页面上
+        }
+    };
+    //距离过年的倒计时
+    let guoniandaojishi = new CountDown(2025, 1, 28, '00', '00', '00');
+    guoniandaojishi.createBox('guonian');
+    // 使用 setInterval 持续更新倒计时
+    setInterval(guoniandaojishi.CountTime.bind(guoniandaojishi), 1000);
+    // 距离元旦的倒计时
+    let yuandan = new CountDown(2025, 1, 1, '00', '00', '00');
+    yuandan.createBox('yuandan');
+    // 使用 setInterval 持续更新倒计时
+    setInterval(yuandan.CountTime.bind(yuandan), 1000);
+</script>
+
+</html>

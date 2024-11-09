@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="300" height="300" style="border: 1px solid red"></canvas>
+
+    <script>
+        var canvas = document.querySelector("#canvas");
+        var context = canvas.getContext("2d");
+
+        function Dot(x, y, r, speedX, speedY, color) {
+            this.x = x;
+            this.y = y;
+            this.r = r;
+            this.speedX = speedX;
+            this.speedY = speedY;
+            this.color = color;
+        }
+
+        Dot.prototype.draw = function () {
+            context.beginPath();
+            context.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+            context.fillStyle = this.color;
+            context.fill();
+        };
+
+        Dot.prototype.move = function () {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x >= 300 - this.r || this.x <= this.r) {
+                this.speedX = -this.speedX;
+            }
+            if (this.y >= 300 - this.r || this.y <= this.r) {
+                this.speedY = -this.speedY;
+            }
+
+            this.draw();
+        };
+
+
+        var dots = [];
+        function random(m, n) {
+            return Math.round(Math.random() * (n - m)) + m;
+        }
+        dots.push(new Dot(random(10, 290), random(10, 290), random(5, 10), random(1, 2), random(1, 2), `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`));
+        dots.push(new Dot(random(10, 290), random(10, 290), random(5, 10), random(1, 2), random(1, 2), `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`));
+        dots.push(new Dot(random(10, 290), random(10, 290), random(5, 10), random(1, 2), random(1, 2), `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`));
+        dots.push(new Dot(random(10, 290), random(10, 290), random(5, 10), random(1, 2), random(1, 2), `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`));
+
+        dots.forEach((dot) => {
+            dot.draw();
+        });
+
+        setInterval(() => {
+            console.log(222);
+            context.clearRect(0, 0, 300, 300);
+            dots.forEach((dot) => {
+                dot.move();
+            });
+        }, 30);
+    </script>
+
+    <br />
+    <input class="xxx" type="number" value="1" />的斐波那契值=<span>1</span>
+    <br />
+    <button>计算</button>
+
+    <script>
+        var input = document.querySelector("input.xxx");
+        var span = document.querySelector("span");
+        var w = new Worker("worker-fib.js");
+
+        w.onmessage = function (e) {
+            console.log("worker线程发送给主线程的消息", e, e.data);
+            span.innerText = e.data;
+        };
+
+        var btn = document.querySelector("button");
+        btn.onclick = () => {
+            var n = input.value;
+            w.postMessage(Number(n));
+        };
+    </script>
+</body>
+
+</html>

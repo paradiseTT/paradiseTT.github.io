@@ -1,0 +1,53 @@
+* {
+    list-style: none
+}
+
+h5 {
+    color: #bb9356;
+    width: 100%;
+    text-align: center
+}
+
+h2 {
+    font-size: 35px;
+    letter-spacing: 1px;
+    line-height: 1.14286em;
+    color: #3a3d43;
+    font-weight: 700;
+    text-align: center
+}
+
+.happen {
+
+    margin: 30px 0
+}
+
+.happen .container .row {
+    margin: 30px 0
+}
+
+.happen .container .row .col p {
+    color: #888b90
+}
+
+.happen .container .row .col a.btn.btn-dark {
+    box-shadow: 5px 5px 0 0 rgba(58, 61, 67, 0.3)
+}
+
+.happen .container .row .col img {
+    width: 480px
+}
+
+.wecome .container .tit {
+    width: 100%;
+    margin: 15px 0
+}
+
+.wecome .container .row img {
+    width: 290px
+}
+
+
+.wecome .container .row ul li img {
+    width: 65px
+}

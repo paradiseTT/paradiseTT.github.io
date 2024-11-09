@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <script>
+            let [a, ...b] = [11, 22, 33, 44];
+            console.log(a, b);
+
+            let { x, ...y } = { x: 1, y: 2, z: 3 };
+            console.log(x, y);
+
+            function xxx() {
+                console.log(arguments, arguments.length);
+                for (var i = 0; i < arguments.length; i++) {
+                    console.log(arguments[i]);
+                }
+            }
+            xxx(1, 2);
+            xxx(1, 2, 3);
+        </script> -->
+
+    <!-- <script>
+            // function xxx(x, ...rest) {
+            function xxx(...rest) {
+                // console.log(arguments, arguments.length);
+                console.log(rest); 
+            }
+            xxx(1, 2);
+            xxx(1, 2, 3);
+        </script> -->
+
+    <script>
+        function xxx() {
+            console.log(arguments, arguments.length);
+            let arr = Array.prototype.slice.call(arguments);
+            console.log(arr);
+        }
+        xxx(1, 2, 3);
+    </script>
+</body>
+
+</html>

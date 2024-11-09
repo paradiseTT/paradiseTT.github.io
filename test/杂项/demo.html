@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <button>按钮</button>
+    <br />
+    <br />
+    <div>div的内容</div>
+    <script src="./js/tools.js"></script>
+    <script>
+        var btn = $("button");
+        var myDiv = $("div");
+
+        btn.onclick = function () {
+            animate(myDiv, {width: 300},function(){
+                myDiv.style.backgroundColor = "skyblue";
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="300" height="300" style="border: 1px solid red"></canvas>
+
+    <script>
+        var canvas = document.querySelector("#canvas");
+        var ctx = canvas.getContext("2d");
+
+        function drawDot(x, y) {
+            ctx.beginPath();
+            ctx.arc(x, y, 10, 0, 2 * Math.PI);
+
+            ctx.fillStyle = "red";
+            ctx.fill();
+        }
+
+        var x = 100;
+        var y = 100;
+        var speedX = 1;
+        var speedY = 2;
+        setInterval(() => {
+            ctx.clearRect(0, 0, 300, 300);
+            x += speedX;
+            y += speedY;
+            if (x >= 290 || x <= 10) {
+                speedX = -speedX;
+            }
+            if (y >= 290 || y <= 10) {
+                speedY = -speedY;
+            }
+            drawDot(x, y);
+        }, 30);
+    </script>
+</body>
+
+</html>
